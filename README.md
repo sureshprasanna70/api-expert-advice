@@ -6,6 +6,9 @@ This API is specially designed to work with Ember on the front-end: requests and
 
 To run the application, use the following commands:
 
-`bundle`
-`rake db:create db:migrate db:seed`
-`rails s`
+```
+bundle
+rake db:create db:migrate db:seed
+rails s
+```
+
