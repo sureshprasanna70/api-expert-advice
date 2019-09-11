@@ -6,7 +6,11 @@ module Api
 
       # GET /posts
       def index
-        @posts = Post.includes(user: :accounts).includes(:comments).includes(:tags).where(post_id: nil).order('created_at DESC')
+        @posts = if params[:tag].present?
+                   Post.includes(user: :accounts).includes(:comments).includes(:tags).where(post_id: nil).tagged_with(params[:tag]).order('created_at DESC')
+                 else
+                   Post.includes(user: :accounts).includes(:comments).includes(:tags).where(post_id: nil).order('created_at DESC')
+                 end
         paginate json: @posts, include: %w[comments users]
       end
 
