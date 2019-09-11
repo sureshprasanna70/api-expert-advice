@@ -66,6 +66,8 @@ GEM
       railties (>= 4.2)
     erubi (1.7.1)
     ffi (1.9.25)
+    friendly_id (5.2.5)
+      activerecord (>= 4.0.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     i18n (1.1.0)
@@ -196,6 +198,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.1.0)
   doorkeeper
+  friendly_id (~> 5.2.4)
   listen (>= 3.0.5, < 3.2)
   pg
   pry
