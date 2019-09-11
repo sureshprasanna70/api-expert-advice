@@ -1,14 +1,13 @@
-# Posts controller with endpoints for CRUD on Post model
 module Api
   module V1
-    class PostsController < ApplicationController
-      before_action :set_post, only: [:show, :update, :destroy]
+    # Posts controller with endpoints for CRUD on Post model
+    class PostsController < ApiController
+      before_action :set_post, only: %i[update destroy edit]
 
       # GET /posts
       def index
-        @posts = Post.all
-
-        render json: @posts
+        @posts = Post.includes(user: :accounts).includes(:comments).includes(:tags).where(post_id: nil).order('created_at DESC')
+        paginate json: @posts, include: %w[comments users]
       end
 
       # GET /posts/1
@@ -19,7 +18,6 @@ module Api
       # POST /posts
       def create
         @post = Post.new(post_params)
-
         if @post.save
           render json: @post, status: :created, location: @post
         else
