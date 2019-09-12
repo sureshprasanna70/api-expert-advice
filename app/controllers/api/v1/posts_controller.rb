@@ -16,7 +16,12 @@ module Api
 
       # GET /posts/1
       def show
-        render json: @post
+        @post = Post.includes(user: :accounts).includes(:comments).includes(:tags).friendly.find(params[:id])
+        if @post.post_id.nil?
+          @post.views = @post.views + 1
+          @post.save
+        end
+        render json: @post, include: %w[comments users]
       end
 
       # POST /posts
@@ -47,7 +52,7 @@ module Api
 
       # Use callbacks to share common setup or constraints between actions.
       def set_post
-        @post = Post.find(params[:id])
+        @post = Post.friendly.find(params[:id])
       end
 
       # Only allow a trusted parameter "white list" through.
