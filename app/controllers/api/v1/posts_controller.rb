@@ -2,6 +2,7 @@ module Api
   module V1
     # Posts controller with endpoints for CRUD on Post model
     class PostsController < ApiController
+      before_action :doorkeeper_authorize!, except: %i[index show search]
       before_action :set_post, only: %i[update destroy edit]
 
       # GET /posts
@@ -27,8 +28,10 @@ module Api
       # POST /posts
       def create
         @post = Post.new(post_params)
+        @post.user_id = current_user.id
+        @post.account_id = current_account.id
         if @post.save
-          render json: @post, status: :created, location: @post
+          render json: @post, status: :created
         else
           render json: @post.errors, status: :unprocessable_entity
         end
@@ -57,7 +60,7 @@ module Api
 
       # Only allow a trusted parameter "white list" through.
       def post_params
-        params.require(:post).permit(:title, :body, :views, :user_id, :account_id)
+        params.require(:data).require(:attributes).permit(:title, :post_id, :body, tag_list: [])
       end
     end
   end
