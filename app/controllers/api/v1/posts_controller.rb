@@ -39,8 +39,12 @@ module Api
 
       # PATCH/PUT /posts/1
       def update
-        if @post.update(post_params)
-          render json: @post
+        if @post.user_id == current_user.id
+          if @post.update(post_params)
+            render json: @post
+          else
+            render json: @post.errors, status: :unprocessable_entity
+          end
         else
           render json: @post.errors, status: :unprocessable_entity
         end
