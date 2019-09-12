@@ -52,7 +52,15 @@ module Api
 
       # DELETE /posts/1
       def destroy
-        @post.destroy
+        if @post.user_id == current_user.id
+          if @post.destroy
+            render json: {}, status: :ok
+          else
+            render json: @post.errors, status: :unprocessable_entity
+          end
+        else
+          render json: @post.errors, status: :unprocessable_entity
+        end
       end
 
       private
