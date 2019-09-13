@@ -28,6 +28,8 @@ group :development, :test do
   gem 'pry'
   gem 'rspec-rails'
   gem 'rubocop'
+  gem 'faker'
+  gem 'factory_bot', '~> 4.0'
 end
 
 group :development do
