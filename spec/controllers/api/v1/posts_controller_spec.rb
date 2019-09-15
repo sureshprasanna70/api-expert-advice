@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::PostsController, type: :controller, oauth: true do
-  include_context 'door_token'
   
   let(:application) { create :application }
   let(:user_account_access) { create :user_account_access }
