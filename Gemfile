@@ -23,12 +23,12 @@ gem 'api-pagination'
 gem 'will_paginate'
 gem 'acts-as-taggable-on', '~> 6.0'
 gem 'friendly_id', '~> 5.2.4'
+gem 'faker'
 
 group :development, :test do
   gem 'pry'
   gem 'rspec-rails'
   gem 'rubocop'
-  gem 'faker'
   gem 'factory_bot', '~> 4.0'
 end
 
