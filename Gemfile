@@ -20,6 +20,7 @@ gem 'rack-cors'
 gem 'active_model_serializers'
 gem 'validates_email_format_of'
 gem 'api-pagination'
+
 gem 'will_paginate'
 gem 'acts-as-taggable-on', '~> 6.0'
 gem 'friendly_id', '~> 5.2.4'
